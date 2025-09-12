@@ -1,0 +1,13 @@
+{
+  "anuncios": [
+    {
+      "title": "",
+      "desc": "",
+      "ubi": "(ciudad o remoto)",
+      "contract": "(ej.: full-time, part-time, freelance)",
+      "empresa": "(seleccionada de una lista de empresas existentes o ingresada como nueva)",
+      "date": "(generada automáticamente)",
+      "id": 1
+    }
+  ]
+}
