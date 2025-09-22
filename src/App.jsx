@@ -22,12 +22,6 @@ const App = () => {
       .catch(error => console.error('Error fetching ads:', error));
   }, []);
 
-  const getNextId = (anuncios) => {
-    if (anuncios.length === 0) return 1;
-    const ids = anuncios.map(a => a.id);
-    return Math.max(...ids) + 1;
-  };
-
   const addAnuncio = (newAnuncio) => {
     const newId = getNextId(anuncios);
     const anuncioWithId = { ...newAnuncio, id: newId };
@@ -50,12 +44,6 @@ const App = () => {
       .then((response) => setEmpresas(response.data))
       .catch((error) => console.error("Error loading company:", error));
   }, []);
-
-  const getNextIdEmp = (empresas) => {
-    if (empresas.length === 0) return 1;
-    const ids = empresas.map(e => e.id);
-    return Math.max(...ids) + 1;
-  };
 
   const addEmpresa = (newEmpresa) => {
     const newId = getNextIdEmp(empresas);

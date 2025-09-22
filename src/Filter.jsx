@@ -10,11 +10,11 @@ const Filter = ({ filter, setFilter }) => {
     <Container maxWidth="xl" sx={{ mt: 2 }}>
       <Paper sx={{ p: 3, textAlign: "center" }}>
         <Typography variant="h4" align="center" sx={{ fontWeight: "bold", mb: 2 }}>
-          Registro de Anuncios
+          Registro de Avisos
         </Typography>
 
         <Typography variant="h6" align="center" sx={{ mb: 1 }}>
-          Filtrar Anuncio
+          Filtrar Aviso
         </Typography>
 
         <Box display="flex" justifyContent="center">

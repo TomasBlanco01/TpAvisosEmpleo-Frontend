@@ -1,16 +1,13 @@
-import axios from 'axios'
-const baseUrl = 'http://localhost:3000/empresas'
+import api from '../api';
 
+// Obtener todas las empresas
 const getAll = () => {
-  return axios.get(baseUrl)
-}
+  return api.get('/empresas');
+};
 
-const create = newObject => {
-  return axios.post(baseUrl, newObject)
-}
+// Crear empresa nueva
+const create = (newEmpresa) => {
+  return api.post('/empresas', newEmpresa);
+};
 
-const remove = (id) => {
-  return axios.delete(`${baseUrl}/${id}`)
-}
-
-export default { getAll, create, remove }
+export default { getAll, create };

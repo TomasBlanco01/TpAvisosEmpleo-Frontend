@@ -1,16 +1,18 @@
-import axios from 'axios'
-const baseUrl = 'http://localhost:3000/anuncios'
+import api from '../api';
 
+// Obtener todos los avisos
 const getAll = () => {
-  return axios.get(baseUrl)
-}
+  return api.get('/avisos');
+};
 
-const create = newObject => {
-  return axios.post(baseUrl, newObject)
-}
+// Crear un aviso nuevo
+const create = (newAviso) => {
+  return api.post('/avisos', newAviso);
+};
 
+// Eliminar un aviso por ID
 const remove = (id) => {
-  return axios.delete(`${baseUrl}/${id}`)
-}
+  return api.delete(`/avisos/${id}`);
+};
 
-export default { getAll, create, remove }
+export default { getAll, create, remove };

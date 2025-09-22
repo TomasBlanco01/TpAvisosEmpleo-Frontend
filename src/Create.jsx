@@ -79,7 +79,7 @@ const Create = ({ addAnuncio, empresas, addEmpresa }) => {
           align="center"
           sx={{ mb: 2 }}
         >
-          Agregar Anuncio
+          Agregar Aviso
         </Typography>
         <Box
           component="form"

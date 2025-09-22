@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableRow, Paper, Button, TextField, Container, Box, Typography, FormControl, InputLabel, Select, MenuItem, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import DeleteIcon from "@mui/icons-material/Delete";
 import InfoIcon from "@mui/icons-material/Info";
@@ -50,17 +50,17 @@ const List = ({ anuncios, empresas, filter, deleteAnuncio }) => {
                     </TableHead>
                     <TableBody>
                         {anuncios.filter((anuncio) =>
-                            anuncio.ubi.toLowerCase().includes(filter.toLowerCase()) ||
-                            anuncio.contract.toLowerCase().includes(filter.toLowerCase())
+                            anuncio.ubicacion.toLowerCase().includes(filter.toLowerCase()) ||
+                            anuncio.tipo_contrato.toLowerCase().includes(filter.toLowerCase())
                         ).map((anuncio) => (
                             <TableRow key={anuncio.id} sx={{ "&:nth-of-type(odd)": { backgroundColor: "#f9f9f9" } }}>
-                                <TableCell align="center">{anuncio.title}</TableCell>
-                                <TableCell align="center">{anuncio.desc}</TableCell>
-                                <TableCell align="center">{anuncio.ubi}</TableCell>
-                                <TableCell align="center">{anuncio.contract}</TableCell>
+                                <TableCell align="center">{anuncio.titulo}</TableCell>
+                                <TableCell align="center">{anuncio.descripcion}</TableCell>
+                                <TableCell align="center">{anuncio.ubicacion}</TableCell>
+                                <TableCell align="center">{anuncio.tipo_contrato}</TableCell>
                                 <TableCell align="center">{anuncio.empresa}</TableCell>
-                                <TableCell align="center">{anuncio.date}</TableCell>
-                                <TableCell align="center" >
+                                <TableCell align="center">{new Date(anuncio.fecha_publicacion).toLocaleDateString("es-AR")}</TableCell>
+                                <TableCell align="center">
                                     <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
                                         <Button
                                             variant="outlined"
@@ -79,31 +79,31 @@ const List = ({ anuncios, empresas, filter, deleteAnuncio }) => {
                                         <Dialog open={openVisual} onClose={() => setOpenVisual(false)}>
                                             <DialogContent>
                                                 {selectedAnuncio && (
-                                                <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
-                                                    <TableCell>
-                                                        <Typography variant="h6" align="center" sx={{ mb: 1 }}> Anuncio </Typography>
-                                                        <Typography><strong>Título:</strong> {selectedAnuncio.title}</Typography>
-                                                        <Typography><strong>Descripción:</strong> {selectedAnuncio.desc}</Typography>
-                                                        <Typography><strong>Ubicación:</strong> {selectedAnuncio.ubi}</Typography>
-                                                        <Typography><strong>Contrato:</strong> {selectedAnuncio.contract}</Typography>
-                                                        <Typography><strong>Fecha:</strong> {selectedAnuncio.date}</Typography>
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        <Typography variant="h6" align="center" sx={{ mb: 1 }}> Empresa </Typography>
-                                                        {empresaInfo ? (
-                                                            <>
-                                                                <Typography><strong>Nombre:</strong> {empresaInfo.nombre}</Typography>
-                                                                <Typography><strong>Descripción:</strong> {empresaInfo.desc}</Typography>
-                                                                <Typography><strong>Email:</strong> {empresaInfo.email}</Typography>
-                                                            </>
-                                                        ) : (
-                                                            <Typography>No se encontró información de la empresa.</Typography>
-                                                        )}
-                                                    </TableCell>
-                                                    <Button onClick={() => setOpenVisual(false)} variant="outlined" color="error" startIcon={<CloseIcon />}>
-                                                        Cerrar
-                                                    </Button>
-                                                </Box>
+                                                    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
+                                                        <TableCell>
+                                                            <Typography variant="h6" align="center" sx={{ mb: 1 }}> Anuncio </Typography>
+                                                            <Typography><strong>Título:</strong> {selectedAnuncio.titulo}</Typography>
+                                                            <Typography><strong>Descripción:</strong> {selectedAnuncio.descripcion}</Typography>
+                                                            <Typography><strong>Ubicación:</strong> {selectedAnuncio.ubicacion}</Typography>
+                                                            <Typography><strong>Contrato:</strong> {selectedAnuncio.tipo_contrato}</Typography>
+                                                            <Typography><strong>Fecha:</strong> {new Date(selectedAnuncio.fecha_publicacion).toLocaleDateString("es-AR")}</Typography>
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            <Typography variant="h6" align="center" sx={{ mb: 1 }}> Empresa </Typography>
+                                                            {empresaInfo ? (
+                                                                <>
+                                                                    <Typography><strong>Nombre:</strong> {empresaInfo.nombre}</Typography>
+                                                                    <Typography><strong>Descripción:</strong> {empresaInfo.descripcion}</Typography>
+                                                                    <Typography><strong>Email:</strong> {empresaInfo.email}</Typography>
+                                                                </>
+                                                            ) : (
+                                                                <Typography>No se encontró información de la empresa.</Typography>
+                                                            )}
+                                                        </TableCell>
+                                                        <Button onClick={() => setOpenVisual(false)} variant="outlined" color="error" startIcon={<CloseIcon />}>
+                                                            Cerrar
+                                                        </Button>
+                                                    </Box>
                                                 )}
                                             </DialogContent>
                                         </Dialog>
@@ -114,7 +114,7 @@ const List = ({ anuncios, empresas, filter, deleteAnuncio }) => {
                                             size="small"
                                             startIcon={<DeleteIcon />}
                                             sx={{ px: 1 }}
-                                            onClick={() => deleteAnuncio(anuncio.id, anuncio.title)}
+                                            onClick={() => deleteAnuncio(anuncio.id, anuncio.titulo)}
                                         >
                                             Delete
                                         </Button>
