@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
+import React from 'react'
 import noteServiceAnuncios from './services/anuncios'
 import noteServiceEmpresas from './services/empresas'
 import List from './List'
 import Create from './Create'
-import Visual from './Visual'
 import Filter from './Filter'
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -12,7 +12,7 @@ import '@fontsource/roboto/700.css';
 
 const App = () => {
 
-  const [anuncios, setAnuncios] = useState([])
+  const [anuncios, setAnuncios] = useState([]);
   const [empresas, setEmpresas] = useState([]);
   const [filter, setFilter] = useState("");
 
@@ -48,7 +48,7 @@ const App = () => {
   useEffect(() => {
     noteServiceEmpresas.getAll()
       .then((response) => setEmpresas(response.data))
-      .catch((error) => console.error("Error loading empresas:", error));
+      .catch((error) => console.error("Error loading company:", error));
   }, []);
 
   const getNextIdEmp = (empresas) => {
@@ -63,15 +63,14 @@ const App = () => {
 
     noteServiceEmpresas.create(empresaWithId)
       .then(response => setEmpresas(empresas.concat(response.data)))
-      .catch(error => console.error('Error adding ads:', error));
+      .catch(error => console.error('Error adding company:', error));
   };
 
   return (
     <div>
       <Filter filter={filter} setFilter={setFilter}></Filter>
-      <List anuncios={anuncios} filter={filter} deleteAnuncio={deleteAnuncio}></List>
-      <Create anuncios={anuncios} addAnuncio={addAnuncio} empresas={empresas} addEmpresa={addEmpresa}></Create>
-      <Visual></Visual>
+      <List anuncios={anuncios} empresas={empresas} filter={filter} deleteAnuncio={deleteAnuncio}></List>
+      <Create addAnuncio={addAnuncio} empresas={empresas} addEmpresa={addEmpresa}></Create>
     </div>
   )
 }

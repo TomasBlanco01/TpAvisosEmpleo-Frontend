@@ -1,4 +1,5 @@
 import { Paper, TextField, Container, Typography, Box } from "@mui/material";
+import React from 'react'
 
 const Filter = ({ filter, setFilter }) => {
   const handleFilter = (event) => {
@@ -6,13 +7,9 @@ const Filter = ({ filter, setFilter }) => {
   };
 
   return (
-    <Container maxWidth="md" sx={{ mt: 2 }}>
+    <Container maxWidth="xl" sx={{ mt: 2 }}>
       <Paper sx={{ p: 3, textAlign: "center" }}>
-        <Typography
-          variant="h4"
-          align="center"
-          sx={{ fontWeight: "bold", mb: 2 }}
-        >
+        <Typography variant="h4" align="center" sx={{ fontWeight: "bold", mb: 2 }}>
           Registro de Anuncios
         </Typography>
 

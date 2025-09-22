@@ -1,7 +1,0 @@
-{
-  "empresas": [
-    { "id": 1, "nombre": "Google" },
-    { "id": 2, "nombre": "Microsoft" },
-    { "id": 3, "nombre": "Amazon" }
-  ]
-}

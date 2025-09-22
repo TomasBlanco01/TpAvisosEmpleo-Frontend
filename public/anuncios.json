@@ -1,13 +1,63 @@
 {
   "anuncios": [
     {
-      "title": "",
+      "id": "1",
+      "title": "diesel lange",
+      "desc": "agricola",
+      "ubi": "TL",
+      "contract": "Part-time",
+      "empresa": "Amazon",
+      "date": "16/9/2025"
+    },
+    {
+      "id": "2",
+      "title": "buscamos programadores",
+      "desc": "programadores en react",
+      "ubi": "remoto",
+      "contract": "Full-time",
+      "empresa": "Google",
+      "date": "17/9/2025"
+    },
+    {
+      "id": 3,
+      "title": "buscamos programadores",
+      "desc": "programadores en react",
+      "ubi": "TL",
+      "contract": "Freelance",
+      "empresa": "METa",
+      "date": "21/9/2025"
+    }
+  ],
+  "empresas": [
+    {
+      "id": "1",
+      "nombre": "Google",
       "desc": "",
-      "ubi": "(ciudad o remoto)",
-      "contract": "(ej.: full-time, part-time, freelance)",
-      "empresa": "(seleccionada de una lista de empresas existentes o ingresada como nueva)",
-      "date": "(generada automáticamente)",
-      "id": 1
+      "email": ""
+    },
+    {
+      "id": "2",
+      "nombre": "Microsoft",
+      "desc": "",
+      "email": ""
+    },
+    {
+      "id": "3",
+      "nombre": "Amazon",
+      "desc": "",
+      "email": ""
+    },
+    {
+      "id": "4",
+      "nombre": "DieselLange",
+      "desc": "empresa Agricola",
+      "email": "tomasa@gmail.com"
+    },
+    {
+      "id": "5",
+      "nombre": "METa",
+      "desc": "tecnologia",
+      "email": "tttTL@gmail.com"
     }
   ]
 }

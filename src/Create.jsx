@@ -1,13 +1,24 @@
 import { useState } from 'react'
-import { Paper, Button, TextField, Container, Box, Typography } from '@mui/material';
+import React from 'react'
+import { Paper, Button, TextField, Container, Box, Typography, FormControl, InputLabel, Select, MenuItem, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import AddIcon from "@mui/icons-material/Add";
+import SendIcon from "@mui/icons-material/Send";
 
-const Create = ({ anuncios, addAnuncio, empresas }) => {
+const Create = ({ addAnuncio, empresas, addEmpresa }) => {
+  //anuncios
   const [newTitle, setNewTitle] = useState('')
   const [newDesc, setNewDesc] = useState('')
   const [newUbi, setNewUbi] = useState('')
   const [newContract, setNewContract] = useState('')
   const [newEmpresa, setNewEmpresa] = useState('')
+
+  //empresas
+  const [newNameEmpresa, setNewNameEmpresa] = useState('')
+  const [newDescEmpresa, setNewDescEmpresa] = useState('')
+  const [newEmailEmpresa, setNewEmailEmpresa] = useState('')
+
+  const [openNewEmpresa, setOpenNewEmpresa] = useState(false);
+
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -37,15 +48,38 @@ const Create = ({ anuncios, addAnuncio, empresas }) => {
     setNewEmpresa("");
   }
 
+  const handleSubmitEmpresa = (event) => {
+    event.preventDefault()
+    if (newNameEmpresa.trim() === '' || newDescEmpresa.trim() === '' || newEmailEmpresa.trim() === '') {
+      alert("Por favor completa todos los campos obligatorios.")
+      setNewNameEmpresa("");
+      setNewDescEmpresa("");
+      setNewEmailEmpresa("");
+      return
+    }
+
+    addEmpresa({
+      nombre: newNameEmpresa,
+      desc: newDescEmpresa,
+      email: newEmailEmpresa
+    });
+
+    setNewEmpresa(newNameEmpresa);
+    setNewNameEmpresa("");
+    setNewDescEmpresa("");
+    setNewEmailEmpresa("");
+    setOpenNewEmpresa(false);
+  }
+
   return (
-    <Container maxWidth="md" sx={{ mt: 2 }}>
+    <Container maxWidth="xl" sx={{ mt: 2 }}>
       <Paper sx={{ p: 3 }}>
         <Typography
           variant="h6"
           align="center"
           sx={{ mb: 2 }}
         >
-          Agregar Contacto
+          Agregar Anuncio
         </Typography>
         <Box
           component="form"
@@ -108,16 +142,34 @@ const Create = ({ anuncios, addAnuncio, empresas }) => {
                   {empresa.nombre}
                 </MenuItem>
               ))}
+              <MenuItem>
+                <Button variant="outlined" onClick={() => setOpenNewEmpresa(true)} startIcon={<AddIcon />}> Nueva Empresa </Button>
+              </MenuItem>
             </Select>
           </FormControl>
+
+          <Dialog open={openNewEmpresa} onClose={() => setOpenNewEmpresa(false)}>
+            <DialogTitle>Nueva Empresa</DialogTitle>
+            <DialogContent>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
+                <TextField label="Nombre" size="small" fullWidth value={newNameEmpresa} onChange={(e) => setNewNameEmpresa(e.target.value)} />
+                <TextField label="Descripción" size="small" fullWidth value={newDescEmpresa} onChange={(e) => setNewDescEmpresa(e.target.value)} />
+                <TextField label="Email" size="small" fullWidth value={newEmailEmpresa} onChange={(e) => setNewEmailEmpresa(e.target.value)} />
+                <Button onClick={handleSubmitEmpresa} variant="contained" color="primary" startIcon={<AddIcon />}>
+                  Agregar
+                </Button>
+              </Box>
+            </DialogContent>
+          </Dialog>
 
           <Button
             type="submit"
             variant="contained"
             color="primary"
-            startIcon={<AddIcon />}
+            startIcon={<SendIcon />}
+            sx={{ px: 6 }}
           >
-            Agregar
+            Enviar
           </Button>
         </Box>
       </Paper>
