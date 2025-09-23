@@ -5,6 +5,7 @@ import noteServiceEmpresas from './services/empresas'
 import List from './List'
 import Create from './Create'
 import Filter from './Filter'
+import { Typography } from "@mui/material";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -56,9 +57,12 @@ const App = () => {
 
   return (
     <div>
-      <Filter filter={filter} setFilter={setFilter}></Filter>
-      <List anuncios={anuncios} empresas={empresas} filter={filter} deleteAnuncio={deleteAnuncio}></List>
+      <Typography variant="h4" align="center" sx={{ fontWeight: "bold", mb: 1 }}>
+                Registro de Avisos
+              </Typography>
       <Create addAnuncio={addAnuncio} empresas={empresas} addEmpresa={addEmpresa}></Create>
+      <Filter filter={filter} setFilter={setFilter}></Filter> 
+      <List anuncios={anuncios} empresas={empresas} filter={filter} deleteAnuncio={deleteAnuncio}></List>
     </div>
   )
 }
