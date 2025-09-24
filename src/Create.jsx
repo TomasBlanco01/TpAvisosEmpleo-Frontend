@@ -10,7 +10,7 @@ const Create = ({ addAnuncio, empresas, addEmpresa }) => {
   const [newDesc, setNewDesc] = useState('')
   const [newUbi, setNewUbi] = useState('')
   const [newContract, setNewContract] = useState('')
-  const [newEmpresa, setNewEmpresa] = useState('')
+  const [newEmpresa, setNewEmpresa] = useState("")
 
   //empresas
   const [newNameEmpresa, setNewNameEmpresa] = useState('')
@@ -33,12 +33,11 @@ const Create = ({ addAnuncio, empresas, addEmpresa }) => {
     }
 
     addAnuncio({
-      title: newTitle,
-      desc: newDesc,
-      ubi: newUbi,
-      contract: newContract,
-      empresa: newEmpresa,
-      date: new Date().toLocaleDateString()
+      titulo: newTitle,
+      descripcion: newDesc,
+      ubicacion: newUbi,
+      tipo_contrato: newContract,
+      empresa: { nombre: newEmpresa }
     });
 
     setNewTitle("");
@@ -55,12 +54,12 @@ const Create = ({ addAnuncio, empresas, addEmpresa }) => {
       setNewNameEmpresa("");
       setNewDescEmpresa("");
       setNewEmailEmpresa("");
-      return
+      return;
     }
 
     addEmpresa({
       nombre: newNameEmpresa,
-      desc: newDescEmpresa,
+      descripcion: newDescEmpresa,
       email: newEmailEmpresa
     });
 
@@ -133,8 +132,14 @@ const Create = ({ addAnuncio, empresas, addEmpresa }) => {
           <FormControl fullWidth size="small">
             <InputLabel>Empresa</InputLabel>
             <Select
-              value={newEmpresa}
-              onChange={(e) => setNewEmpresa(e.target.value)}
+              value={newEmpresa ?? ""}
+              onChange={(e) => {
+                if (e.target.value === "__nueva__") {
+                  setOpenNewEmpresa(true);
+                } else {
+                  setNewEmpresa(e.target.value);
+                }
+              }}
               label="Empresa"
             >
               {empresas.map((empresa) => (
@@ -142,8 +147,8 @@ const Create = ({ addAnuncio, empresas, addEmpresa }) => {
                   {empresa.nombre}
                 </MenuItem>
               ))}
-              <MenuItem>
-                <Button variant="outlined" onClick={() => setOpenNewEmpresa(true)} startIcon={<AddIcon />}> Nueva Empresa </Button>
+              <MenuItem value="__nueva__">
+                <Button variant="outlined" startIcon={<AddIcon />}> Nueva Empresa </Button>
               </MenuItem>
             </Select>
           </FormControl>
@@ -168,6 +173,7 @@ const Create = ({ addAnuncio, empresas, addEmpresa }) => {
             color="primary"
             startIcon={<SendIcon />}
             sx={{ px: 6 }}
+            fullWidth
           >
             Enviar
           </Button>

@@ -24,18 +24,15 @@ const App = () => {
   }, []);
 
   const addAnuncio = (newAnuncio) => {
-    const newId = getNextId(anuncios);
-    const anuncioWithId = { ...newAnuncio, id: newId };
-
-    noteServiceAnuncios.create(anuncioWithId)
-      .then(response => setAnuncios(anuncios.concat(response.data)))
+    noteServiceAnuncios.create(newAnuncio)
+      .then(() => noteServiceAnuncios.getAll().then(resp => setAnuncios(resp.data)))
       .catch(error => console.error('Error adding ads:', error));
   };
 
   const deleteAnuncio = (anuncioId, anuncioName) => {
     if (window.confirm(`Delete ${anuncioName} ?`)) {
       noteServiceAnuncios.remove(anuncioId)
-        .then(() => setAnuncios(anuncios.filter(a => a.id !== anuncioId)))
+        .then(() => { setAnuncios(prev => prev.filter(a => a.id !== anuncioId));})
         .catch(error => console.error('Error deleting ads:', error));
     }
   };
@@ -47,21 +44,16 @@ const App = () => {
   }, []);
 
   const addEmpresa = (newEmpresa) => {
-    const newId = getNextIdEmp(empresas);
-    const empresaWithId = { ...newEmpresa, id: newId };
-
-    noteServiceEmpresas.create(empresaWithId)
-      .then(response => setEmpresas(empresas.concat(response.data)))
+    noteServiceEmpresas.create(newEmpresa)
+      .then(() => noteServiceEmpresas.getAll().then(resp => setEmpresas(resp.data)))
       .catch(error => console.error('Error adding company:', error));
   };
 
   return (
     <div>
-      <Typography variant="h4" align="center" sx={{ fontWeight: "bold", mb: 1 }}>
-                Registro de Avisos
-              </Typography>
+      <Typography variant="h4" align="center" sx={{ fontWeight: "bold", mb: 1 }}> Registro de Avisos </Typography>
       <Create addAnuncio={addAnuncio} empresas={empresas} addEmpresa={addEmpresa}></Create>
-      <Filter filter={filter} setFilter={setFilter}></Filter> 
+      <Filter filter={filter} setFilter={setFilter}></Filter>
       <List anuncios={anuncios} empresas={empresas} filter={filter} deleteAnuncio={deleteAnuncio}></List>
     </div>
   )
